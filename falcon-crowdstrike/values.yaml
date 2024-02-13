@@ -1,0 +1,90 @@
+# Default values for falcon-crowdstrike.
+
+replicaCount: 1
+
+image:
+  repository: ghcr.io/tsigouris007/falcon-crowdstrike-siem-connector
+  pullPolicy: IfNotPresent
+  tag: "v0.0.5"
+
+imagePullSecrets: []
+nameOverride: "falcon-crowdstrike-app"
+fullnameOverride: "falcon-crowdstrike-helm"
+
+labels: {}
+
+selectorLabels: {}
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Automatically mount a ServiceAccount's API credentials?
+  automount: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: "falcon-crowdstrike-sa"
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext:
+  fsGroup: 1000
+
+securityContext:
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 1000
+  allowPrivilegeEscalation: false
+  seccompProfile:
+    type: RuntimeDefault
+
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+# Additional volumes on the output Deployment definition.
+volumes:
+- name: log-volume
+  emptyDir: {}
+- name: etc-crowdstrike-volume
+  mountPath: {}
+
+# Additional volumeMounts on the output Deployment definition.
+volumeMounts:
+- name: log-volume
+  mountPath: "/var/log/crowdstrike/falconhoseclient/"
+  readOnly: false
+- name: etc-crowdstrike-volume
+  mountPath: "/opt/crowdstrike/etc/"
+  readOnly: false
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+ingress:
+  enabled: false
+
+secrets:
+  CLIENT_ID: ""
+  CLIENT_SECRET: ""
+  API_BASE_URL: ""
