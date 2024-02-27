@@ -1,7 +1,8 @@
+{{- if .Values.service.create -}}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "falcon-crowdstrike.fullname" . }}
+  name: {{ include "falcon-crowdstrike.fullname" . | default "ClusterIP" }}
   labels:
     {{- include "falcon-crowdstrike.labels" . | nindent 4 }}
 spec:
@@ -13,3 +14,4 @@ spec:
       name: http
   selector:
     {{- include "falcon-crowdstrike.selectorLabels" . | nindent 4 }}
+{{- end }}
