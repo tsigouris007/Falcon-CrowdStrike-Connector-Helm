@@ -79,6 +79,7 @@ volumeMounts:
   readOnly: false
 - name: events-volume
   mountPath: "/var/log/pods/falconhoseclient/"
+  readOnly: false
 - name: etc-crowdstrike-volume
   mountPath: "/opt/crowdstrike/etc/"
   readOnly: false
