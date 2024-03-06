@@ -5,7 +5,7 @@ replicaCount: 1
 image:
   repository: ghcr.io/tsigouris007/falcon-crowdstrike-siem-connector
   pullPolicy: IfNotPresent
-  tag: "v0.0.9"
+  tag: "v0.1.0"
 
 imagePullSecrets: []
 nameOverride: "falcon-crowdstrike-app"
@@ -67,6 +67,8 @@ autoscaling:
 volumes:
 - name: log-volume
   emptyDir: {}
+- name: events-volume
+  emptyDir: {}
 - name: etc-crowdstrike-volume
   mountPath: {}
 
@@ -75,6 +77,8 @@ volumeMounts:
 - name: log-volume
   mountPath: "/var/log/crowdstrike/falconhoseclient/"
   readOnly: false
+- name: events-volume
+  mountPath: "/var/log/pods/falconhoseclient/"
 - name: etc-crowdstrike-volume
   mountPath: "/opt/crowdstrike/etc/"
   readOnly: false
