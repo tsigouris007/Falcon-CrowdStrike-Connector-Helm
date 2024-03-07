@@ -31,6 +31,19 @@ secrets:
 
 Fill them accordingly.
 
+## Custom Log Location
+
+Under the `values.yaml` file you will also find a block of `customLog` attributes as shown:
+```yaml
+customLog:
+  enabled: true
+  logDir: /var/log/crowdstrike/falconhoseclient/
+  logFile: output
+```
+
+Change them accordingly if you chose to use another location for your event logs. \
+If left empty, everything is output via stdout.
+
 ## TODO
 
 Move secrets to native k8s `Secret` object.

@@ -1,5 +1,5 @@
-1. Get the application URL by running these commands:
 {{- if .Values.ingress.enabled }}
+Get the application URL by running these commands:
 {{- range $host := .Values.ingress.hosts }}
   {{- range .paths }}
   http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ .path }}
@@ -22,4 +22,7 @@
   echo "Visit http://127.0.0.1:8080 to use your application"
   kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 8080:$CONTAINER_PORT
 {{- end }}
+{{- end }}
+{{- if .Values.customLog }}
+Falcon CrowdStrike log location: {{ .Values.customLog.logDir }}{{ .Values.customLog.logFile }}
 {{- end }}

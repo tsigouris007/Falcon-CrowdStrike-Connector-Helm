@@ -50,7 +50,17 @@ spec:
               value: {{ .Values.secrets.CLIENT_SECRET | quote }}
             - name: API_BASE_URL
               value: {{ .Values.secrets.API_BASE_URL | quote }}
-          {{- end }}          
+          {{- end }}
+          {{- if .Values.customLog.enabled }}
+            {{- if .Values.customLog.logDir }}
+            - name: LOG_DIR
+              value: {{ .Values.customLog.logDir | quote }}
+            {{- end }}
+            {{- if .Values.customLog.logFile }}
+            - name: LOG_FILE
+              value: {{ .Values.customLog.logFile | quote }}
+            {{- end }}
+          {{- end }}
       {{- with .Values.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}

@@ -4,8 +4,8 @@ replicaCount: 1
 
 image:
   repository: ghcr.io/tsigouris007/falcon-crowdstrike-siem-connector
-  pullPolicy: IfNotPresent
-  tag: "v0.1.0"
+  pullPolicy: Always # IfNotPresent
+  tag: "v0.1.1"
 
 imagePullSecrets: []
 nameOverride: "falcon-crowdstrike-app"
@@ -29,6 +29,8 @@ serviceAccount:
 service:
   create: false
   type: ClusterIP
+  # For compliance with NOTES.txt
+  port: 80
 
 podAnnotations: {}
 podLabels: {}
@@ -67,22 +69,24 @@ autoscaling:
 volumes:
 - name: log-volume
   emptyDir: {}
-- name: events-volume
-  emptyDir: {}
 - name: etc-crowdstrike-volume
-  mountPath: {}
+  emptyDir: {}
+# Uncomment below to declare a different path for your container's LOG_DIR and LOG_FILE setup
+# - name: events-volume
+#   emptyDir: {}
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts:
 - name: log-volume
   mountPath: "/var/log/crowdstrike/falconhoseclient/"
   readOnly: false
-- name: events-volume
-  mountPath: "/var/log/pods/falconhoseclient/"
-  readOnly: false
 - name: etc-crowdstrike-volume
   mountPath: "/opt/crowdstrike/etc/"
   readOnly: false
+# Uncomment below to declare a different path for your container's LOG_DIR and LOG_FILE setup
+# - name: events-volume
+#   mountPath: "/var/log/pods/falconhoseclient/"
+#   readOnly: false
 
 nodeSelector: {}
 
@@ -92,7 +96,16 @@ affinity: {}
 
 ingress:
   enabled: false
+  # For compliance with NOTES.txt
+  hosts: []
 
+# For your custom LOG_DIR and LOG_FILE setup
+customLog:
+  enabled: true
+  logDir: /var/log/crowdstrike/falconhoseclient/
+  logFile: output
+
+# Do not expose the following to your repository
 secrets:
   CLIENT_ID: ""
   CLIENT_SECRET: ""
