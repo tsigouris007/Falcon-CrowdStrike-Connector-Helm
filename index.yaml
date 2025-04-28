@@ -3,6 +3,16 @@ entries:
   falcon-crowdstrike:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2025-04-28T12:12:19.870143496Z"
+    description: A Helm chart for Falcon CrowdStrike SIEM Connector for your k8s
+    digest: f956898d7f875d5e7415adb5ab9998cfdc36b65fd086d9bd5ca0d4853bba0fe1
+    name: falcon-crowdstrike
+    type: application
+    urls:
+    - https://github.com/tsigouris007/Falcon-CrowdStrike-Connector-Helm/releases/download/falcon-crowdstrike-0.0.7/falcon-crowdstrike-0.0.7.tgz
+    version: 0.0.7
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2025-01-14T10:07:06.543321428Z"
     description: A Helm chart for Falcon CrowdStrike SIEM Connector for your k8s
     digest: 1f3b9c209b44d0994a3ac9f2e813631e156fe44ce1532a2b8e1e84510cb8f91c
@@ -61,4 +71,4 @@ entries:
     urls:
     - https://github.com/tsigouris007/Falcon-CrowdStrike-Connector-Helm/releases/download/falcon-crowdstrike-0.0.1/falcon-crowdstrike-0.0.1.tgz
     version: 0.0.1
-generated: "2025-01-14T10:07:06.543345552Z"
+generated: "2025-04-28T12:12:19.870168563Z"
