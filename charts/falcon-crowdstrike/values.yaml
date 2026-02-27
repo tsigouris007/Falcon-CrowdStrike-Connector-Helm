@@ -5,7 +5,7 @@ replicaCount: 1
 image:
   repository: ghcr.io/tsigouris007/falcon-crowdstrike-siem-connector
   pullPolicy: Always # IfNotPresent
-  tag: "v1.0.1"
+  tag: "v1.0.2"
 
 imagePullSecrets: []
 nameOverride: "falcon-crowdstrike-app"
@@ -53,10 +53,10 @@ securityContext:
 resources:
   limits:
     cpu: 100m
-    memory: 128Mi
+    memory: 250Mi
   requests:
     cpu: 100m
-    memory: 128Mi
+    memory: 250Mi
 
 autoscaling:
   enabled: false
