@@ -5,7 +5,7 @@ replicaCount: 1
 image:
   repository: ghcr.io/tsigouris007/falcon-crowdstrike-siem-connector
   pullPolicy: Always # IfNotPresent
-  tag: "v1.0.0"
+  tag: "v1.0.1"
 
 imagePullSecrets: []
 nameOverride: "falcon-crowdstrike-app"
